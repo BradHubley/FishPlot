@@ -12,8 +12,15 @@ LazyData: true
 URL: https://github.com/BradHubley/FishPlot
 BugReports: https://github.com/BradHubley/FishPlot/issues
 RoxygenNote: 7.3.2
+Imports:
+   sf (>= 1.0.0),
+    dplyr (>= 1.0.0),
+    ggplot2 (>= 3.3.0),
+    ggimage (>= 0.3.0)
 Suggests: 
     testthat (>= 3.0.0)
+Remotes:
+    Maritimes/Mar.data
 Config/testthat/edition: 3
 Depends: 
     R (>= 3.5)

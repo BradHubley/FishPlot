@@ -31,7 +31,7 @@ rv_data <- subset(my_data,select=columns)
 usethis::use_data(rv_data, overwrite = TRUE)
 
 
-coast<-st_as_sf(SpatialHub::coastMR,coords=4:5,crs=st_crs(4326))
+coast<-SpatialHub::coastMR
 
 usethis::use_data(coast, overwrite = TRUE)
 

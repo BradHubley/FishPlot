@@ -1,0 +1,65 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# FishPlot
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of FishPlot is to plot the fish caught on the DFO Maritimes Ecosystem Survey
+
+Currently supported Species include:
+  23 Redfish,
+  11 Haddock,
+  10 Cod,
+  14 Silver hake,
+  16 Pollock,
+  30 Halibut,
+  220 Dogfish,
+  40 Plaice,
+  42 Yellowtail,
+  200 Barndoor skate
+  
+
+## Installation
+
+You can install the development version of FishPlot from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("BradHubley/FishPlot")
+
+#or
+
+devtools::install_github("BradHubley/FishPlot")
+
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(FishPlot)
+
+## basic example code
+
+RED_data.24<-subset(rv_data,YEAR==2024&SPEC==23 )
+fishPlot(RED_data.24, Species="Redfish",lab=2024,ladj=0.001,jadj=0.2,nadj=0.01,lscale=30 )
+
+
+```
+
+
