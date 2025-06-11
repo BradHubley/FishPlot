@@ -19,22 +19,22 @@ fishPlot<-function(FishData,ladj=0.001,jadj=0.2,nadj=0.01, Species="Redfish",lab
   library(Mar.data)
   library(ggimage)
 
-  if(Species=="Redfish")pic=file.path("data","fish","Sebastes_fasciatus.png")
-  if(Species=="Haddock")pic=file.path("data","fish","Melanogrammus_aeglefinus.png")
-  if(Species=="Cod")pic=file.path("data","fish","Gadus_morhua.png")
-  if(Species=="Silver hake")pic=file.path("data","fish","Merluccius_bilinearis.png")
-  if(Species=="Pollock")pic=file.path("data","fish","Pollachius_virens.png")
-  if(Species=="Halibut")pic=file.path("data","fish","Hippoglossus_hippoglossus.png")
-  if(Species=="Dogfish")pic=file.path("data","fish","Squalus_acanthias.png")
-  if(Species=="Plaice")pic=file.path("data","fish","Hippoglossoides_platessoides.png")
-  if(Species=="Yellowtail")pic=file.path("data","fish","Limanda_ferruginea.png")
-  if(Species=="Barndoor skate")pic=file.path("data","fish","dipturus_laevis.png")
+  if(Species=="Redfish")pic=system.file("fish","Sebastes_fasciatus.png", package = "FishPlot")
+  if(Species=="Haddock")pic=system.file("fish","Melanogrammus_aeglefinus.png", package = "FishPlot")
+  if(Species=="Cod")pic=system.file("fish","Gadus_morhua.png", package = "FishPlot")
+  if(Species=="Silver hake")pic=system.file("fish","Merluccius_bilinearis.png", package = "FishPlot")
+  if(Species=="Pollock")pic=system.file("fish","Pollachius_virens.png", package = "FishPlot")
+  if(Species=="Halibut")pic=system.file("fish","Hippoglossus_hippoglossus.png", package = "FishPlot")
+  if(Species=="Dogfish")pic=system.file("fish","Squalus_acanthias.png", package = "FishPlot")
+  if(Species=="Plaice")pic=system.file("fish","Hippoglossoides_platessoides.png", package = "FishPlot")
+  if(Species=="Yellowtail")pic=system.file("fish","Limanda_ferruginea.png", package = "FishPlot")
+  if(Species=="Barndoor skate")pic=system.file("fish","dipturus_laevis.png", package = "FishPlot")
 
-  coast<-readRDS("data/coast.rds")
+  #coast<-readRDS("data/coast.rds")
 
   if(type=="mean.length"){
-    mlen<-FishData %>%
-      group_by(YEAR,SETNO,LONGITUDE,LATITUDE) %>%
+    mlen<-FishData |>
+      group_by(YEAR,SETNO,LONGITUDE,LATITUDE) |>
       summarize(meanLEN=weighted.mean(FLEN,CLEN_ADJ))
 
     FMapSurvey1 <- ggplot()+

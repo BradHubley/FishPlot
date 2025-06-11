@@ -23,8 +23,8 @@ self_filter(env=RV)  # Apply filters to all related tables
 # 4. Create analysis-ready dataset
 my_data <- summarize_catches(morph_dets = TRUE, env=RV)
 
-columns<-c("YEAR","SETNO","LONGITUDE","LATITUDE","TOTNO","FLEN","CLEN_ADJ")
-
+columns<-c("YEAR","SETNO","LONGITUDE","LATITUDE","TOTNO","FLEN","CLEN_ADJ","SPEC")
+my_data <- subset(my_data,select=columns)
 
 # redfish
 RED_data.24<-subset(my_data,YEAR==2024&SPEC==23,columns )

@@ -12,3 +12,8 @@ LazyData: true
 URL: https://github.com/BradHubley/FishPlot
 BugReports: https://github.com/BradHubley/FishPlot/issues
 RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 3.5)
