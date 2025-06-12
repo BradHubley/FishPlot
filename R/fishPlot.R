@@ -25,6 +25,12 @@ fishPlot<-function(FishData,ladj=0.001,jadj=0.2,nadj=0.01, Species="Redfish",lab
   if(Species=="Yellowtail")pic=system.file("fish","Limanda_ferruginea.png", package = "FishPlot")
   if(Species=="Barndoor skate")pic=system.file("fish","dipturus_laevis.png", package = "FishPlot")
 
+  library(sf)
+  library(dplyr)
+  library(Mar.data)
+  library(ggplot2)
+  library(ggimage)
+
   coast2 <- st_as_sf(coast,coords=4:5,crs=st_crs(4326)) |>
     group_by(PID,SID) |>
     summarize(do_union = FALSE) |>
