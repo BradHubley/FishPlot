@@ -7,8 +7,8 @@ file.rename(file.path("inst","fish","andes",files),file.path("inst","fish","ande
 #install_github("Maritimes/Mar.datawrangling")
 library(Mar.datawrangling)
 
-uid="hubleyb"
-pwd="R4#vmxtas"
+uid=""
+pwd=""
 
 
 # 1. Establish Oracle connection first (NEW REQUIREMENT)
