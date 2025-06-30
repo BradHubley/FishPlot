@@ -6,10 +6,11 @@
 \usage{
 fishPlot(
   FishData,
+  yr = 1970:2024,
   ladj = 0.001,
   jadj = 0.2,
   nadj = 0.01,
-  Species = "Redfish",
+  SP = 23,
   lab = NULL,
   yl = c(41, 47.85),
   xl = c(-68, -56.6),
@@ -20,13 +21,15 @@ fishPlot(
 \arguments{
 \item{FishData}{The fish data}
 
+\item{yr}{The year}
+
 \item{ladj}{The length adjustment}
 
 \item{jadj}{The jitter adjustment}
 
 \item{nadj}{The number adjustment}
 
-\item{Species}{The Species Name}
+\item{SP}{The Species Code}
 
 \item{yl}{The latitudes}
 
@@ -35,8 +38,6 @@ fishPlot(
 \item{lscale}{The length scale}
 
 \item{type}{The type of plot "mean.length" or "FishPlot"TM}
-
-\item{yr}{The year}
 }
 \value{
 A Fish Plot

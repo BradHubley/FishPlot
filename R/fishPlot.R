@@ -4,7 +4,7 @@
 #' @param ladj The length adjustment
 #' @param jadj The jitter adjustment
 #' @param nadj The number adjustment
-#' @param Species The Species Name
+#' @param SP The Species Code
 #' @param yl The latitudes
 #' @param xl The longitudes
 #' @param lscale The length scale
@@ -12,18 +12,7 @@
 #' @return A Fish Plot
 #' @export
 
-fishPlot<-function(FishData,ladj=0.001,jadj=0.2,nadj=0.01, Species="Redfish",lab=NULL, yl= c(41, 47.85),xl= c(-68,-56.6),lscale=30, type="FishPlot"){
-
-  if(Species=="Redfish")pic=system.file("fish","Sebastes_fasciatus.png", package = "FishPlot")
-  if(Species=="Haddock")pic=system.file("fish","Melanogrammus_aeglefinus.png", package = "FishPlot")
-  if(Species=="Cod")pic=system.file("fish","Gadus_morhua.png", package = "FishPlot")
-  if(Species=="Silver hake")pic=system.file("fish","Merluccius_bilinearis.png", package = "FishPlot")
-  if(Species=="Pollock")pic=system.file("fish","Pollachius_virens.png", package = "FishPlot")
-  if(Species=="Halibut")pic=system.file("fish","Hippoglossus_hippoglossus.png", package = "FishPlot")
-  if(Species=="Dogfish")pic=system.file("fish","Squalus_acanthias.png", package = "FishPlot")
-  if(Species=="Plaice")pic=system.file("fish","Hippoglossoides_platessoides.png", package = "FishPlot")
-  if(Species=="Yellowtail")pic=system.file("fish","Limanda_ferruginea.png", package = "FishPlot")
-  if(Species=="Barndoor skate")pic=system.file("fish","dipturus_laevis.png", package = "FishPlot")
+fishPlot<-function(FishData, yr=1970:2024,ladj=0.001,jadj=0.2,nadj=0.01, SP=23,lab=NULL, yl= c(41, 47.85),xl= c(-68,-56.6),lscale=30, type="FishPlot"){
 
   library(sf)
   library(dplyr)
@@ -31,11 +20,19 @@ fishPlot<-function(FishData,ladj=0.001,jadj=0.2,nadj=0.01, Species="Redfish",lab
   library(ggplot2)
   library(ggimage)
 
+  # use Ecosystem survey data (Summer) if not provided
+  if(missing(FishData))FishData<-subset(rv_data,SPEC==SP&YEAR%in%yr)
+
+  # get a pic of the fish (pics from ANDES)
+  pic=system.file("fish",paste0(substr(SP+10000,2,5),".png"), package = "FishPlot")
+
+  # coast line
   coast2 <- st_as_sf(coast,coords=4:5,crs=st_crs(4326)) |>
     group_by(PID,SID) |>
     summarize(do_union = FALSE) |>
     st_cast("POLYGON")
 
+  # mean length version
   if(type=="mean.length"){
     mlen<-FishData |>
       group_by(YEAR,SETNO,LONGITUDE,LATITUDE) |>
@@ -53,9 +50,10 @@ fishPlot<-function(FishData,ladj=0.001,jadj=0.2,nadj=0.01, Species="Redfish",lab
       geom_text(aes(x = xl[2]-1, y = yl[1]+0.7, label = paste(lscale,"cm")))
 
 
-    ggsave(file.path("plots",paste0("MeanLengthMap",Species,lab,".png")), plot = FMapSurvey1, height = 8, width = 11, units = "in", dpi = 300)
+    ggsave(file.path("plots",paste0("MeanLengthMap",SP,lab,".png")), plot = FMapSurvey1, height = 8, width = 11, units = "in", dpi = 300)
   }
 
+  # fishPlot version
   if(type=="FishPlot"){
 
     sets<-unique(FishData$SETNO)
@@ -80,7 +78,7 @@ fishPlot<-function(FishData,ladj=0.001,jadj=0.2,nadj=0.01, Species="Redfish",lab
       geom_image(aes(x=xl[2]-1,y=yl[1]+1,image = pic), size=lscale*ladj  )+
       geom_text(aes(x = xl[2]-1, y = yl[1]+0.7, label = paste(lscale,"cm")))
 
-    ggsave(file.path("plots",paste0("FishMap",Species,lab,".png")), plot = FMapSurvey2, height = 8, width = 11, units = "in", dpi = 300)
+    ggsave(file.path("plots",paste0("FishMap",SP,lab,".png")), plot = FMapSurvey2, height = 8, width = 11, units = "in", dpi = 300)
     return(FMapSurvey2)
   }
 }

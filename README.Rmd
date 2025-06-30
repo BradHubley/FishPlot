@@ -20,17 +20,7 @@ knitr::opts_chunk$set(
 
 The goal of FishPlot is to plot the fish caught on the DFO Maritimes Ecosystem Survey
 
-Currently supported Species include:
-  23 Redfish,
-  11 Haddock,
-  10 Cod,
-  14 Silver hake,
-  16 Pollock,
-  30 Halibut,
-  220 Dogfish,
-  40 Plaice,
-  42 Yellowtail,
-  200 Barndoor skate
+fish to be plotted are sampled (with replacement) from the length data. When nadj=1 the sample size is equal to
   
 
 ## Installation
@@ -55,10 +45,10 @@ This is a basic example which shows you how to solve a common problem:
 library(FishPlot)
 
 ## basic example code
-
+ 
 RED_data.24<-subset(rv_data,YEAR==2024&SPEC==23 )
-fishPlot(RED_data.24, Species="Redfish",lab=2024,ladj=0.001,jadj=0.2,nadj=0.01,lscale=30 )
-
+fishPlot(RED_data.24, SP=23,lab="Redfish2024",ladj=0.001,jadj=0.2,nadj=0.01,lscale=30 )
+ 
 
 ```
 
