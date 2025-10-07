@@ -12,7 +12,7 @@
 #' @return A Fish Plot
 #' @export
 
-fishPlot<-function(FishData, yr=1970:2024,ladj=0.001,jadj=0.2,nadj=0.01, SP=23,lab=NULL, yl= c(41, 47.85),xl= c(-68,-56.6),lscale=30, type="FishPlot"){
+fishPlot<-function(FishData, yr=1970:2024,ladj=0.001,jadj=0.2,nadj=0.01, SP=23,lab=NULL, yl= c(41, 47.85),xl= c(-68,-56.6),lscale=30, type="FishPlot",units='cm'){
 
   library(sf)
   library(dplyr)
@@ -76,7 +76,7 @@ fishPlot<-function(FishData, yr=1970:2024,ladj=0.001,jadj=0.2,nadj=0.01, SP=23,l
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
       geom_image(data = fdat, aes(x=LONGITUDE,y=LATITUDE,image = pic), size=fdat$FLEN*ladj  ) +
       geom_image(aes(x=xl[2]-1,y=yl[1]+1,image = pic), size=lscale*ladj  )+
-      geom_text(aes(x = xl[2]-1, y = yl[1]+0.7, label = paste(lscale,"cm")))
+      geom_text(aes(x = xl[2]-1, y = yl[1]+0.7, label = paste(lscale,units)))
 
     ggsave(file.path("plots",paste0("FishMap",SP,lab,".png")), plot = FMapSurvey2, height = 8, width = 11, units = "in", dpi = 300)
     return(FMapSurvey2)
